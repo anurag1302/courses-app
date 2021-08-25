@@ -15,7 +15,8 @@ namespace CoursesAPI.Mappers
                 CourseBook = model.CourseBook,
                 CourseContent = model.CourseContent,
                 CoordinatorName = model.CoordinatorName,
-                NoOfStudents = model.NoOfStudents
+                NoOfStudents = model.NoOfStudents,
+                CreatedOn = model.CreatedOnUtc
             };
         }
 
@@ -31,7 +32,6 @@ namespace CoursesAPI.Mappers
                 IsActive = true,
                 CreatedBy = 1001,
                 CreatedOnUtc = DateTime.UtcNow
-
             };
         }
     }

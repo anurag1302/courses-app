@@ -1,4 +1,6 @@
-﻿namespace CoursesAPI.ApiModels
+﻿using System;
+
+namespace CoursesAPI.ApiModels
 {
     public class CourseApiModel
     {
@@ -8,5 +10,6 @@
         public string CourseBook { get; set; }
         public int? NoOfStudents { get; set; }
         public string CoordinatorName { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

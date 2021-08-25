@@ -1,7 +1,6 @@
 ﻿using CoursesAPI.ApiModels;
 using CoursesAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CoursesAPI.Controllers
