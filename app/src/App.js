@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [list, setList] = useState([]);
+
+  const callAPI = async () => {
+    const api = `https://localhost:5001/GetAllCourses`;
+    let response = await fetch(api);
+    let data = await response.json();
+    setList(data);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={callAPI}>Call API</button>
+      {list.length > 0
+        ? list.map((item) => {
+            return (
+              <div key={item.id}>
+                <div>{item.courseName}</div>
+                <div>
+                  <img src={item.courseBook} alt="book-img" />
+                </div>
+                <div>{item.coordinatorName}</div>
+                <div>--------------------------------</div>
+              </div>
+            );
+          })
+        : null}
     </div>
   );
 }
