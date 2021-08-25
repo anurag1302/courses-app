@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/api/CoursesAPI/CoursesAPI/bin/Debug/net5.0
+/api/CoursesAPI/CoursesAPI/obj
+/api/CoursesAPI/.vs
