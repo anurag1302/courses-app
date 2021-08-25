@@ -1,0 +1,10 @@
+.courses-div {
+  margin: 2rem;
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.courses-div img {
+  width: 100%;
+  height: 300px;
+}
