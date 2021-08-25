@@ -1,5 +1,7 @@
-﻿using CoursesAPI.Domain;
+﻿using CoursesAPI.ApiModels;
+using CoursesAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CoursesAPI.Controllers
@@ -17,10 +19,17 @@ namespace CoursesAPI.Controllers
 
         [HttpGet]
         [Route("/GetAllCourses")]
-        public IActionResult GetAll()
+        public IActionResult GetAllCourses()
         {
-            var courses = _employeeContext.Courses.ToList();
-            return Ok(courses);
+            var courses = _employeeContext.Courses
+                .Where(x => x.IsActive == true)
+                .ToList();
+
+            var result = courses
+                .Select(x => Mappers.Mappers.From(x))
+                .ToList();
+
+            return Ok(result);
         }
 
         [HttpGet]
@@ -28,14 +37,51 @@ namespace CoursesAPI.Controllers
         public IActionResult GetCoursesById(int id)
         {
             var course = _employeeContext.Courses
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == id && x.IsActive == true)
                 .FirstOrDefault();
 
-            if(course==null)
+            if (course == null)
             {
                 return Ok(null);
             }
-            return Ok(course);
+
+            var result = Mappers.Mappers.From(course);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("/CreateCourse")]
+        public IActionResult CreateCourse([FromBody] CourseApiModel model)
+        {
+            var course = Mappers.Mappers.To(model);
+
+            _employeeContext.Courses.Add(course);
+
+            _employeeContext.SaveChanges();
+
+            return RedirectToAction("GetAllCourses", "Courses");
+        }
+
+        [HttpDelete]
+        [Route("/DeleteCourse")]
+        public IActionResult DeleteCourse(int id)
+        {
+            var course = _employeeContext.Courses
+                .Where(x => x.Id == id && x.IsActive == true)
+                .FirstOrDefault();
+
+            if (course == null)
+            {
+                return NotFound("Course not found to be deleted");
+            }
+
+            course.IsActive = false;
+
+            _employeeContext.Update(course);
+            _employeeContext.SaveChanges();
+
+            return Ok("Course deleted");
         }
     }
 }
