@@ -1,7 +1,7 @@
 .courses-div {
   margin: 1rem;
-  display: flex !important;
-  justify-content: space-around !important;
+  display: flex;
+  justify-content: space-between;
 }
 
 .courses-div img {
