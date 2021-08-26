@@ -45,6 +45,9 @@ const Courses = () => {
           </div>
         );
       })}
+      <div className="create-course">
+        <Link to="/createcourse">Create a Course</Link>
+      </div>
     </div>
   );
 };

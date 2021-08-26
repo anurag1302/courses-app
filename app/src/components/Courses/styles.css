@@ -16,3 +16,14 @@
 .courses-div .card ul li {
   background-color: khaki;
 }
+.create-course {
+  width: 10%;
+  height: 2rem;
+  background-color: black;
+  font-size: large;
+  font-weight: bold;
+}
+
+.create-course a {
+  color: lime;
+}

@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import EditCourse from "./components/EditCourse/EditCourse";
+import CreateCourse from "./components/CreateCourse/CreateCourse";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact component={App} />
         <Route path="/edit/:id" exact component={EditCourse} />
+        <Route path="/createcourse" exact component={CreateCourse} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
