@@ -8,3 +8,11 @@
   width: 100%;
   height: 250px;
 }
+
+.courses-div .card {
+  background-color: khaki;
+}
+
+.courses-div .card ul li {
+  background-color: khaki;
+}
