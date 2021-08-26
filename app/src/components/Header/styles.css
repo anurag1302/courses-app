@@ -1,6 +1,11 @@
 .header-div {
   width: 100%;
-  height: 3rem;
+  height: auto;
   background-color: black;
   color: chartreuse;
+}
+
+.header-div a {
+  font-size: large;
+  font-weight: bold;
 }

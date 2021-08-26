@@ -7,6 +7,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import EditCourse from "./components/EditCourse/EditCourse";
 import CreateCourse from "./components/CreateCourse/CreateCourse";
+import Error from "./components/Error/Error";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Route path="/" exact component={App} />
         <Route path="/edit/:id" exact component={EditCourse} />
         <Route path="/createcourse" exact component={CreateCourse} />
+        <Route component={Error} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,

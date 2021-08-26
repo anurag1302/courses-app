@@ -64,9 +64,7 @@ const EditCourse = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateObject),
     };
-    console.log("hii");
-    console.log(updateObject);
-
+  
     const response = await fetch(apiUrl, requestOptions);
     const data = await response.json();
     console.log(data);

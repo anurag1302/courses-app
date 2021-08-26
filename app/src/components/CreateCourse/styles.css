@@ -1,0 +1,11 @@
+.create-new-course {
+  width: 70%;
+  height: auto;
+  background-color: rgb(159, 240, 122);
+  margin: 20px;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}

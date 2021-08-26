@@ -31,7 +31,7 @@ namespace CoursesAPI.Mappers
                 NoOfStudents = model.NoOfStudents,
                 IsActive = true,
                 CreatedBy = 1001,
-                CreatedOnUtc = DateTime.UtcNow
+                CreatedOnUtc = model.CreatedOn
             };
         }
     }

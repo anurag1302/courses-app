@@ -60,7 +60,7 @@ namespace CoursesAPI.Controllers
 
             _employeeContext.SaveChanges();
 
-            return RedirectToAction("GetAllCourses", "Courses");
+            return Ok(new JsonResult("Course created"));
         }
 
         [HttpPut]
@@ -90,7 +90,7 @@ namespace CoursesAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("/DeleteCourse")]
+        [Route("/DeleteCourse/{id}")]
         public IActionResult DeleteCourse(int id)
         {
             var course = _employeeContext.Courses

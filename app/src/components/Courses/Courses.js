@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import API from "../APIs/API";
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     let apiUrl = API.ALL_COURSES_API;
@@ -16,6 +17,28 @@ const Courses = () => {
     };
     fetchData();
   }, []);
+
+  const deleteCourse = async (e, id) => {
+    e.preventDefault();
+
+    let decision = window.confirm(
+      "Are you sure you want to delete the course?"
+    );
+
+    if (!decision) {
+      return;
+    } else {
+      let apiUrl = `${API.DELETE_COURSE}${id}`;
+      const requestOptions = {
+        method: "DELETE",
+      };
+
+      const response = await fetch(apiUrl, requestOptions);
+      const data = await response.json();
+      console.log(data);
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="courses-div">
@@ -40,14 +63,21 @@ const Courses = () => {
               </li>
             </ul>
             <div className="card-body">
-              <Link to={link}>Edit</Link>
+              <Link className="btn btn-success" to={link}>
+                Edit
+              </Link>
+              <button
+                className="btn btn-danger"
+                onClick={(e) => {
+                  deleteCourse(e, item.id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         );
       })}
-      <div className="create-course">
-        <Link to="/createcourse">Create a Course</Link>
-      </div>
     </div>
   );
 };

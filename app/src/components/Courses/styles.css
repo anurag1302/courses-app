@@ -1,12 +1,13 @@
 .courses-div {
-  margin: 1rem;
+  /* margin: 1rem; */
   display: flex;
   justify-content: space-between;
+  flex-wrap: nowrap;
 }
 
 .courses-div img {
   width: 100%;
-  height: 250px;
+  height: 200px;
 }
 
 .courses-div .card {
@@ -16,14 +17,12 @@
 .courses-div .card ul li {
   background-color: khaki;
 }
-.create-course {
-  width: 10%;
-  height: 2rem;
-  background-color: black;
-  font-size: large;
-  font-weight: bold;
+
+.card-body a {
+  border-radius: 1rem;
 }
 
-.create-course a {
-  color: lime;
+.card-body button {
+  margin-left: 10px;
+  border-radius: 1rem;
 }
