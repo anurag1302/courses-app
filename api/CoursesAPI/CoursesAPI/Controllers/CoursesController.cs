@@ -1,6 +1,7 @@
 ﻿using CoursesAPI.ApiModels;
 using CoursesAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace CoursesAPI.Controllers
@@ -60,6 +61,32 @@ namespace CoursesAPI.Controllers
             _employeeContext.SaveChanges();
 
             return RedirectToAction("GetAllCourses", "Courses");
+        }
+
+        [HttpPut]
+        [Route("/UpdateCourse")]
+        public IActionResult UpdateCourse([FromBody] CourseApiModel model)
+        {
+            var course = _employeeContext.Courses
+                .Where(x => x.Id == model.Id && x.IsActive == true)
+                .FirstOrDefault();
+
+            if (course == null)
+            {
+                return NotFound("Course not found to be updated");
+            }
+
+            course.CoordinatorName = model.CoordinatorName;
+            course.CourseBook = model.CourseBook;
+            course.CourseContent = model.CourseContent;
+            course.NoOfStudents = model.NoOfStudents;
+            course.CreatedOnUtc = model.CreatedOn;
+            course.ModifiedOnUtc = DateTime.UtcNow;
+
+            _employeeContext.Update(course);
+            _employeeContext.SaveChanges();
+
+            return Ok("Course updated");
         }
 
         [HttpDelete]
