@@ -73,7 +73,7 @@ namespace CoursesAPI.Controllers
 
             if (course == null)
             {
-                return NotFound("Course not found to be updated");
+                return NotFound(new JsonResult("Course not found to be updated"));
             }
 
             course.CoordinatorName = model.CoordinatorName;
@@ -86,7 +86,7 @@ namespace CoursesAPI.Controllers
             _employeeContext.Update(course);
             _employeeContext.SaveChanges();
 
-            return Ok("Course updated");
+            return Ok(new JsonResult("Course updated"));
         }
 
         [HttpDelete]
@@ -99,7 +99,7 @@ namespace CoursesAPI.Controllers
 
             if (course == null)
             {
-                return NotFound("Course not found to be deleted");
+                return NotFound(new JsonResult("Course not found to be deleted"));
             }
 
             course.IsActive = false;
@@ -107,7 +107,7 @@ namespace CoursesAPI.Controllers
             _employeeContext.Update(course);
             _employeeContext.SaveChanges();
 
-            return Ok("Course deleted");
+            return Ok(new JsonResult("Course deleted"));
         }
     }
 }

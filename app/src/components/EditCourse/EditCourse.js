@@ -16,6 +16,10 @@ const EditCourse = () => {
     createdOn: "",
   };
   const [courseData, setCourseData] = useState(emptyCourse);
+  const [content, setContent] = useState("");
+  const [url, setUrl] = useState("");
+  const [students, setStudents] = useState(0);
+  const [trainerName, setTrainerName] = useState("");
 
   useEffect(() => {
     let apiUrl = `${API.GET_COURSE_BY_ID}${id}`;
@@ -28,7 +32,46 @@ const EditCourse = () => {
     fetchData();
   }, [id]);
 
-  console.log(history);
+  const updateContent = (value) => {
+    setContent(value);
+    courseData.courseContent = value;
+  };
+
+  const updateButtonClick = async (e) => {
+    e.preventDefault();
+
+    let apiUrl = API.UPDATE_COURSE;
+
+    let updateObject = {
+      id: id,
+      courseContent: content ? content : courseData.courseContent,
+      courseBook: url ? url : courseData.courseBook,
+      noOfStudents: students ? students : courseData.noOfStudents,
+      coordinatorName: trainerName ? trainerName : courseData.coordinatorName,
+      createdOn: new Date(),
+    };
+    // if (
+    //   !updateObject.courseContent &&
+    //   !updateObject.courseBook &&
+    //   !updateObject.noOfStudents &&
+    //   !updateObject.coordinatorName
+    // ) {
+    //   alert("Please update any value on the form !!!");
+    //   return;
+    // }
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updateObject),
+    };
+    console.log("hii");
+    console.log(updateObject);
+
+    const response = await fetch(apiUrl, requestOptions);
+    const data = await response.json();
+    console.log(data);
+    history.push("/");
+  };
   return (
     <div className="edit-courses">
       <h1>Edit Course</h1>
@@ -57,7 +100,9 @@ const EditCourse = () => {
             type="text"
             className="form-control"
             value={courseData.courseContent}
-            readOnly
+            onChange={(e) => {
+              updateContent(e.currentTarget.value);
+            }}
           />
         </div>
         <div className="col-12">
@@ -66,7 +111,10 @@ const EditCourse = () => {
             type="text"
             className="form-control"
             value={courseData.courseBook}
-            readOnly
+            onChange={(e) => {
+              setUrl(e.currentTarget.value);
+              courseData.courseBook = e.currentTarget.value;
+            }}
           />
         </div>
         <div className="col-md-3">
@@ -75,7 +123,10 @@ const EditCourse = () => {
             type="text"
             className="form-control"
             value={courseData.noOfStudents}
-            readOnly
+            onChange={(e) => {
+              setStudents(e.currentTarget.value);
+              courseData.noOfStudents = e.currentTarget.value;
+            }}
           />
         </div>
         <div className="col-md-3">
@@ -84,7 +135,10 @@ const EditCourse = () => {
             type="text"
             className="form-control"
             value={courseData.coordinatorName}
-            readOnly
+            onChange={(e) => {
+              setTrainerName(e.currentTarget.value);
+              courseData.coordinatorName = e.currentTarget.value;
+            }}
           />
         </div>
         <div className="col-md-3">
@@ -92,21 +146,24 @@ const EditCourse = () => {
           <input
             type="text"
             className="form-control"
-            value={courseData.createdOn}
+            value={new Date(courseData.createdOn).toDateString()}
             readOnly
           />
         </div>
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">
+          <button
+            className="btn btn-primary"
+            onClick={(e) => updateButtonClick(e)}
+          >
             Update
           </button>
         </div>
-        <div className="col-12">
-          <button className="btn btn-dark" onClick={history.goBack}>
-            Back
-          </button>
-        </div>
       </form>
+      <div className="col-12">
+        <button className="btn btn-dark" onClick={history.goBack}>
+          Back
+        </button>
+      </div>
     </div>
   );
 };
