@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import API from "../APIs/API";
 import "./styles.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
     let apiUrl = API.ALL_COURSES_API;
@@ -49,21 +48,24 @@ const Courses = () => {
             <img src={item.courseBook} className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">{item.courseName}</h5>
-              <p className="card-text">{item.courseContent}</p>
+              <p className="card-text">
+                <em>{item.courseContent}</em>
+              </p>
             </div>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                Course Coordinator : {item.coordinatorName}
+                Coordinator : <strong>{item.coordinatorName}</strong>
               </li>
               <li className="list-group-item">
-                Students Enrolled : {item.noOfStudents}
+                Students Enrolled : <strong>{item.noOfStudents}</strong>
               </li>
               <li className="list-group-item">
-                Start Date: {new Date(item.createdOn).toDateString()}
+                Start Date :
+                <strong>{new Date(item.createdOn).toDateString()}</strong>
               </li>
             </ul>
             <div className="card-body">
-              <Link className="btn btn-success" to={link}>
+              <Link className="btn btn-primary" to={link}>
                 Edit
               </Link>
               <button

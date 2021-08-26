@@ -1,5 +1,4 @@
 .courses-div {
-  /* margin: 1rem; */
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -11,11 +10,11 @@
 }
 
 .courses-div .card {
-  background-color: khaki;
+  background-color: rgb(159, 240, 122);
 }
 
 .courses-div .card ul li {
-  background-color: khaki;
+  background-color: rgb(159, 240, 122);
 }
 
 .card-body a {
